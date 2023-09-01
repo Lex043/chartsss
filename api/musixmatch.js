@@ -9,11 +9,14 @@ export default async function handler(request, response) {
             country,
             page: "1",
             format: "json",
-            apikey: import.meta.env.VITE_MUSIXMATCH_API_KEY ?? "",
+            // apikey: import.meta.env.VITE_MUSIXMATCH_API_KEY ?? "",
             page_size: number ? number.toString() : "10",
         });
 
-        const url = `${API_URL}chart.${chart}.get?${params}`;
+        const url = `${API_URL}chart.${chart}.get?${params}&apikey=${
+            import.meta.env.VITE_APP_MUSIXMATCH_KEY
+        }`;
+
         console.log(url);
         const res = await fetch(url);
         const data = await res.text();
